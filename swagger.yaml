@@ -1,0 +1,236 @@
+swagger: '2.0'
+info:
+  x-ibm-name: messenger-trigger
+  title: Messenger-trigger
+  version: 1.0.0
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /messenger-trigger
+securityDefinitions: {}
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - operation-switch:
+          title: operation-switch
+          case:
+            - operations:
+                - verb: post
+                  path: /messenger-trigger
+              execute:
+                - invoke:
+                    target-url: 'https://openwhisk.ng.bluemix.net/api/v1/namespaces/' + YOUR_NAMESPACE_HERE + '/triggers/' + YOUR_TRIGGER_NAME_HERE
+                    username: YOUR_WSK_USERNAME
+                    password: YOUR_WSK_PASSWORD
+                    verb: keep
+                    cache-response: no-cache
+            - operations:
+                - verb: get
+                  path: /messenger-trigger
+              execute:
+                - map:
+                    title: map
+                    inputs:
+                      request:
+                        schema:
+                          type: string
+                        variable: request.uri
+                    outputs:
+                      output:
+                        schema:
+                          type: object
+                          properties:
+                            uri:
+                              type: string
+                              name: uri
+                        variable: message.body
+                        content: application/json
+                    actions:
+                      - set: output.uri
+                        from: request
+                    version: 1.0.0
+                - invoke:
+                    title: invoke
+                    timeout: 60
+                    verb: POST
+                    cache-response: no-cache
+                    cache-ttl: 900
+                    version: 1.0.0
+                    target-url: 'https://openwhisk.ng.bluemix.net/api/v1/namespaces/' + YOUR_NAMESPACE_HERE + '/actions/' + YOUR_ACTION_NAME_HERE + 'blocking=true'
+                    username: YOUR_WSK_USERNAME
+                    password: YOUR_WSK_PASSWORD
+                    output: whisk
+                - map:
+                    title: map
+                    inputs:
+                      input:
+                        schema:
+                          description: ''
+                          type: object
+                          properties:
+                            status:
+                              type: object
+                              properties:
+                                code:
+                                  type: number
+                                  name: code
+                                reason:
+                                  type: string
+                                  name: reason
+                              name: status
+                            body:
+                              type: object
+                              properties:
+                                duration:
+                                  type: number
+                                  name: duration
+                                name:
+                                  type: string
+                                  name: name
+                                subject:
+                                  type: string
+                                  name: subject
+                                activationId:
+                                  type: string
+                                  name: activationId
+                                publish:
+                                  type: boolean
+                                  name: publish
+                                annotations:
+                                  type: array
+                                  items:
+                                    properties:
+                                      key:
+                                        type: string
+                                        name: key
+                                      value:
+                                        type: object
+                                        properties:
+                                          timeout:
+                                            type: number
+                                            name: timeout
+                                          memory:
+                                            type: number
+                                            name: memory
+                                          logs:
+                                            type: number
+                                            name: logs
+                                        name: value
+                                    type: object
+                                  name: annotations
+                                version:
+                                  type: string
+                                  name: version
+                                response:
+                                  type: object
+                                  properties:
+                                    result:
+                                      type: object
+                                      properties:
+                                        challenge:
+                                          type: string
+                                          name: challenge
+                                      name: result
+                                    success:
+                                      type: boolean
+                                      name: success
+                                    status:
+                                      type: string
+                                      name: status
+                                  name: response
+                                end:
+                                  type: number
+                                  name: end
+                                logs:
+                                  type: array
+                                  items:
+                                    required: []
+                                    properties: {}
+                                    type: object
+                                  name: logs
+                                start:
+                                  type: number
+                                  name: start
+                                namespace:
+                                  type: string
+                                  name: namespace
+                              name: body
+                            headers:
+                              type: object
+                              properties:
+                                X-Backside-Transport:
+                                  type: string
+                                  name: X-Backside-Transport
+                                Server:
+                                  type: string
+                                  name: Server
+                                Date:
+                                  type: string
+                                  name: Date
+                                Content-Type:
+                                  type: string
+                                  name: Content-Type
+                                Access-Control-Allow-Origin:
+                                  type: string
+                                  name: Access-Control-Allow-Origin
+                                Access-Control-Allow-Headers:
+                                  type: string
+                                  name: Access-Control-Allow-Headers
+                                X-Global-Transaction-ID:
+                                  type: string
+                                  name: X-Global-Transaction-ID
+                                Set-Cookie:
+                                  type: string
+                                  name: Set-Cookie
+                              name: headers
+                        variable: whisk
+                        content: application/json
+                    outputs:
+                      output:
+                        schema:
+                          type: string
+                        variable: message.body
+                    actions:
+                      - set: output
+                        from: input.body.response.result.challenge
+                    version: 1.0.0
+          otherwise: []
+          version: 1.0.0
+  phase: realized
+paths:
+  /messenger-trigger:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+      parameters:
+        - name: param
+          required: false
+          in: body
+          schema:
+            type: object
+    get:
+      responses:
+        '200':
+          description: 200 OK
+      produces:
+        - text/html
+        - application/text
+        - application/xml
+        - text/xml
+      parameters:
+        - name: hub.verify_token
+          type: string
+          required: true
+          in: query
+        - name: hub.challenge
+          type: integer
+          required: true
+          in: query
+          format: int64
+definitions: {}
+tags: []
