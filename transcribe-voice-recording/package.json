@@ -1,0 +1,7 @@
+{
+  "main": "transcribe-voice-recording.js",
+  "dependencies": {
+    "cloudconvert": "1.1.x",
+    "request-promise": "4.2.x"
+  }
+}

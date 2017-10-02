@@ -1,0 +1,40 @@
+swagger: '2.0'
+info:
+  x-ibm-name: transcribe-voice-recording
+  title: transcribe-voice-recording
+  version: 1.0.0
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /transcribe-voice-recording
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions: {}
+security: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          target-url: 'https://openwhisk.ng.bluemix.net/api/v1/web/' + YOUR_NAMESPACE + '/' + YOUR_ACTION_NAME + '?blocking=true'
+          username: YOUR_WSK_USERNAME
+          password: YOUR_WSK_PASSWORD
+          verb: POST
+  phase: realized
+paths:
+  /transcribe-voice-recording:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+    post:
+      responses:
+        '200':
+          description: 200 OK
+definitions: {}
+tags: []
