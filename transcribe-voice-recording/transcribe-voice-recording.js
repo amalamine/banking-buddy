@@ -1,5 +1,5 @@
 var fs = require('fs'),
-    cloudconvert = new (require('cloudconvert'))(params.cloudconvert_apikey);
+    cloudconvert = new (require('cloudconvert'))(YOUR_API_KEY);
 var request = require('request-promise')
 
 
@@ -17,19 +17,19 @@ var promise = new Promise(function(resolve, reject){
         "wait": true,
         "output": {
             "googlecloud": {
-                "projectid": params.gc_projectid,
-                "bucket": params.gc_bucket,
+                "projectid": YOUR_PROJECTID,
+                "bucket": YOUR_BUCKET_NAME,
                 "credentials": {
                     "type": "service_account",
-                    "project_id": params.gc_cred_projectid,
-                    "private_key_id": params.gc_cred_privatekeyid,
-                    "private_key": params.gc_cred_privatekey,
-                    "client_email": params.gc_cred_clientemail,
-                    "client_id": params.gc_cred_clientid,
+                    "project_id": YOUR_PROJECT_ID,
+                    "private_key_id": YOUR_PRIVATE_KEY_ID,
+                    "private_key": YOUR_PRIVATE_KEY,
+                    "client_email": YOUR_CLIENT_EMAIL,
+                    "client_id": YOUR_CLIEND_ID,
                     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
                     "token_uri": "https://accounts.google.com/o/oauth2/token",
                     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-                    "client_x509_cert_url": params.gc_cred_certurl
+                    "client_x509_cert_url": YOUR_CERT_URL
                 }
             }
         },
