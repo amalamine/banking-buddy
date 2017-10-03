@@ -21,9 +21,9 @@ x-ibm-configuration:
   assembly:
     execute:
       - invoke:
-          target-url: 'https://openwhisk.ng.bluemix.net/api/v1/web/' + YOUR_NAMESPACE + '/' + YOUR_ACTION_NAME + '?blocking=true'
-          username: YOUR_WSK_USERNAME
-          password: YOUR_WSK_PASSWORD
+          target-url: 'https://openwhisk.ng.bluemix.net/api/v1/web/amalamine_banking-buddy-guide/default/transcribe-voice-recording?blocking=true'
+          username: '866821aa-24e4-4578-9cae-6fd13e57b17c'
+          password: '7lbqaCdlYEUDLg68poEvyClYIOp2IwfzvY0UcxxtZKZOAuJ1QTIIOvLqcobfeJdQ'
           verb: POST
   phase: realized
 paths:

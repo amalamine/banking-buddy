@@ -77,7 +77,6 @@ function main(params){
                   }
 
                 });
-        // }
     }
     else if (params.attachment.type=="audio"){
         console.log("audio")
