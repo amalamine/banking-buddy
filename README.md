@@ -1,4 +1,4 @@
-# Conversational AI for the Enterprise
+# Serverless Facebook Messenger Bot
 ### Using IBM Cloud Functions & Watson Conversation
 
 #### Complete guide here: https://medium.com/@aamine/conversational-ai-for-the-enterprise-35acb9a1e591
