@@ -1,10 +1,13 @@
 # Conversational AI for the Enterprise
 ### Using IBM Cloud Functions & Watson Conversation
 
+#### Complete guide here: https://medium.com/@aamine/conversational-ai-for-the-enterprise-35acb9a1e591
+#### Chat with Banking Buddy on Facebook Messenger here: https://www.messenger.com/t/thebankingbuddy
+
 ## Overview
 ![overview](resources/guide/overview.png)
 
-The actions are as follows:
+## Actions
 
 1. Listen — receive a request object from Facebook Messenger, and extract the sender’s userid, text, and attachments.
 
@@ -31,7 +34,3 @@ The actions are as follows:
 4. IBM API Connect
 
 5. CloudConvert API, Google Cloud Speech & Google Cloud Storage
-
-
-#### Complete guide here: https://medium.com/@aamine/conversational-ai-for-the-enterprise-35acb9a1e591
-#### Chat with Banking Buddy on Facebook Messenger here: https://www.messenger.com/t/thebankingbuddy
